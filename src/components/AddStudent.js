@@ -21,13 +21,14 @@ const AddStudent = ()=> {
         e.preventDefault();
 
         // storing the access token in the session
-        const token = sessionStorage.getItem('access_token');
+        //const token = sessionStorage.getItem('access_token');
+        //console.log('got token')
 
         axios.post('http://localhost:4000/addStudents', data,{
-            headers: {
+           /* headers: {
                 Authorization: `Bearer ${token}`,
                 'Content-type': 'application/json',
-            },
+            },*/
         })
         .then(res=> {
             toast.success('New student added successfully',{
@@ -52,25 +53,25 @@ const AddStudent = ()=> {
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>First Name:</Form.Label>
-                    <Form.Control name="firstName" type="text" value={data.firstName} onChange={handleChange} placeholder="Enter firstname"></Form.Control>
-                    <p>{data.firstName}</p>
+                    <Form.Control name="firstName" type="text" value={data.firstName} onChange={handleChange} placeholder="Enter first name"></Form.Control>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Last Name:</Form.Label>
-                    <Form.Control name="lastName" type="text" value={data.lastName} onChange={handleChange} placeholder="Enter lastname"></Form.Control>
-                    <p>{data.lastName}</p>
+                    <Form.Control name="lastName" type="text" value={data.lastName} onChange={handleChange} placeholder="Enter last name"></Form.Control>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Select onChange={handleChange} name="gender">
-                         <option>--Gender--</option>
-                         <option>Male</option>
-                         <option>Female</option>
+                    <Form.Label>Gender:</Form.Label>
+                    <Form.Select onChange={handleChange} name="gender" defaultValue="">
+                        <option value="" disabled>Choose gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
                     </Form.Select>
                 </Form.Group>
 
-                <Button variant='primary' type="submit">Save Student</Button>
+
+                <Button variant='success' type="submit">Save Student</Button>
                 <ToastContainer/>
                 
             </Form>
