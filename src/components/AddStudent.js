@@ -22,15 +22,13 @@ const AddStudent = ()=> {
 
         // storing the access token in the session
         //const token = sessionStorage.getItem('access_token');
-        //console.log('got token')
 
-        axios.post('http://localhost:4000/addStudents', data,{
-           /* headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-type': 'application/json',
-            },*/
-        })
-        .then(res=> {
+        // sending payload to the console
+        console.log('Sending payload:', data);
+
+        axios.post('http://localhost:4000/addStudent', data)
+
+            .then(res=> {
             toast.success('New student added successfully',{
                 position:toast.POSITION.TOP_RIGHT,
                 autoclose:3000
@@ -43,6 +41,7 @@ const AddStudent = ()=> {
                 autoclose:3000
             });
         });
+
     }
 
     return(
@@ -53,12 +52,12 @@ const AddStudent = ()=> {
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>First Name:</Form.Label>
-                    <Form.Control name="firstName" type="text" value={data.firstName} onChange={handleChange} placeholder="Enter first name"></Form.Control>
+                    <Form.Control name="firstName" type="text"  onChange={handleChange} placeholder="Enter first name"></Form.Control>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Last Name:</Form.Label>
-                    <Form.Control name="lastName" type="text" value={data.lastName} onChange={handleChange} placeholder="Enter last name"></Form.Control>
+                    <Form.Control name="lastName" type="text"  onChange={handleChange} placeholder="Enter last name"></Form.Control>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
