@@ -4,8 +4,8 @@ const Navbar = () => {
         <nav className="navbar">
             <h2> College </h2>
             <div className="links">
-                <Link to="/"> Home </Link>
                 <Link to="/addStudent"> Add Student </Link>
+                <Link to="/students"> Students</Link>
                 <Link to="/login"> Login </Link>
 
             </div>
