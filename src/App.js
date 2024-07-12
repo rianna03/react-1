@@ -6,7 +6,8 @@ import { BrowserRouter as Router,Route, Switch } from 'react-router-dom';
 import AddStudent from './components/AddStudent';
 import Navbar from './components/Navbar';
 import Login from './components/Login';
-import AllStudents from './components/AllStuden.js';
+import AllStudents from './components/AllStudents.js';
+import EditStudent from './components/EditStudent.js';
 
 
 function App() {
@@ -28,6 +29,10 @@ function App() {
 
          <Route path="/students">
           <AllStudents></AllStudents>
+         </Route>
+
+         <Route path="/updateStudent/:_id">
+          <EditStudent></EditStudent>
          </Route>
         
        </Switch>

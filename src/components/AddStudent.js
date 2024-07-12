@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { Button, Form } from "react-bootstrap";
 import { ToastContainer, toast} from "react-toastify";
@@ -6,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AddStudent = ()=> {
 
+    const history = useHistory();
     const [data, setData] = useState({
         firstName:'',
         lastName:'',
@@ -33,6 +35,7 @@ const AddStudent = ()=> {
                 position:toast.POSITION.TOP_RIGHT,
                 autoclose:3000
             });
+            history.push('/students');
         })
 
         .catch(err =>{

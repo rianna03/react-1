@@ -11,10 +11,9 @@ const AllStudents = () => {
     useEffect(() => {
         axios.get('http://localhost:4000/students')
             .then(res => {
-                console.log('Full API response:', res); // Log the full response object
-                console.log('Response data:', res.data); // Log the response data
+                console.log('Full API response:', res); 
+                console.log('Response data:', res.data); 
 
-                // Adjust this part based on the actual structure of the response data
                 if (Array.isArray(res.data)) {
                     setRecords(res.data);
                 } else if (Array.isArray(res.data.students)) {
@@ -63,10 +62,10 @@ const AllStudents = () => {
                                             Perform Actions
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <Link to={`/UpdateStudent/${d.student_id}`} className="dropdown-item">
+                                            <Link to={`/updateStudent/${d._id}`} className="dropdown-item">
                                                 Edit customer
                                             </Link>
-                                            <Link to={`/DeleteStudent/${d.student_id}`} className="dropdown-item">
+                                            <Link to={`/deleteStudent/${d._id}`} className="dropdown-item">
                                                 Delete customer
                                             </Link>
                                         </Dropdown.Menu>
