@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, Button } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
 const AllStudents = () => {
+    const { id } = useParams();
     const [data, setRecords] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -29,6 +31,22 @@ const AllStudents = () => {
                 setLoading(false);
             });
     }, []);
+
+    // Delete functionality 
+    const handleDelete = (_id) => {
+
+        if (window.confirm('Are you sure you want to delete this student?')) {
+            axios.delete(`http://localhost:4000/deleteStudent/${_id}`)
+                .then(() => {
+                    const updatedData = data.filter(student => student._id !== id);
+                    setRecords(updatedData);
+                    console.log('student deleted')
+                })
+                .catch(err => {
+                    console.log('There was an error deleting the student!', err);
+                });
+        }
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -63,11 +81,11 @@ const AllStudents = () => {
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
                                             <Link to={`/updateStudent/${d._id}`} className="dropdown-item">
-                                                Edit customer
+                                                Edit student
                                             </Link>
-                                            <Link to={`/deleteStudent/${d._id}`} className="dropdown-item">
-                                                Delete customer
-                                            </Link>
+                                            <Dropdown.Item as={Button} onClick={() => handleDelete(d._id)}>
+                                                Delete student
+                                            </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </td>

@@ -82,7 +82,7 @@ const EditStudent = () => {
                     </Form.Select>
                 </Form.Group>
 
-                <Button variant='success' type="submit">Save Student</Button>
+                <Button variant='success' type="submit">Update Student</Button>
                 <ToastContainer />
             </Form>
         </div>
