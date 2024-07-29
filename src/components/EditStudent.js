@@ -19,18 +19,18 @@ const EditStudent = () => {
     };
 
     useEffect(() => {
-        // if (!_id) {
-        //     console.error("No student ID provided");
-        //     return;
-        // }
+        if (!_id) {
+            console.error("No student ID provided");
+            return;
+        }
         
-        // console.log("Fetching student data for ID:", _id);
+        console.log("Fetching student data for ID:",_id);
         
         axios.get(`http://localhost:4000/getStudent/${_id}`)
-            .then(res => {
+            .then(res => {  
                 // console.log("Student data fetched:", res.data);
                 setData({
-                    _id: res.data._id,
+                    student_id: res.data.student_id,
                     firstName: res.data.firstName,
                     lastName: res.data.lastName,
                     gender: res.data.gender
@@ -42,7 +42,7 @@ const EditStudent = () => {
     const handleEditStudent = (e) => {
         e.preventDefault();
 
-        axios.patch(`http://localhost:4000/updateStudent/${_id}`, data)
+        axios.patch(`http://localhost:4000/updateStudent/${ _id}`, data)
             .then(res => {
                 toast.success('Student updated successfully', {
                     position: toast.POSITION.TOP_RIGHT,

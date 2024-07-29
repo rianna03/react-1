@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Dropdown, Button } from "react-bootstrap";
+import { Dropdown, Button, DropdownItem } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 const AllStudents = () => {
-    const { id } = useParams();
+    const { _id } = useParams();
     const [data, setRecords] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    // const history = useHistory();
 
     useEffect(() => {
-        axios.get('http://localhost:4000/students')
+        axios.get('http://localhost:4000/allStudents')
             .then(res => {
                 console.log('Full API response:', res); 
                 console.log('Response data:', res.data); 
@@ -33,18 +35,18 @@ const AllStudents = () => {
     }, []);
 
     // Delete functionality 
-    const handleDelete = (_id) => {
-
-        if (window.confirm('Are you sure you want to delete this student?')) {
-            axios.delete(`http://localhost:4000/deleteStudent/${_id}`)
-                .then(() => {
-                    const updatedData = data.filter(student => student._id !== id);
-                    setRecords(updatedData);
-                    console.log('student deleted')
-                })
-                .catch(err => {
-                    console.log('There was an error deleting the student!', err);
-                });
+    const handleDelete = (_id)=> {
+        if (window.confirm('Are you sure you want to delete this student')) {
+            axios.delete(`http://localhost:5000/api/Student/deleteStudent/${_id}`)
+            .then(()=> {
+                const updatedRecords = data.filter(student => student._id !== _id);
+                setRecords(updatedRecords);
+                console.log('student deleted');
+                // history.push('/students')
+            })
+            .catch(err => {
+                console.log('There was an error while deleting the student', err);
+            })
         }
     };
 
@@ -83,9 +85,9 @@ const AllStudents = () => {
                                             <Link to={`/updateStudent/${d._id}`} className="dropdown-item">
                                                 Edit student
                                             </Link>
-                                            <Dropdown.Item as={Button} onClick={() => handleDelete(d._id)}>
-                                                Delete student
-                                            </Dropdown.Item>
+                                            <DropdownItem as={Button} onClick={()=> handleDelete(d._id)}>
+                                                Delete Student
+                                            </DropdownItem>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </td>

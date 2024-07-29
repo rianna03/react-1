@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import Login from './components/Login';
 import AllStudents from './components/AllStudents.js';
 import EditStudent from './components/EditStudent.js';
+import Register from './components/Register.js';
 
 
 function App() {
@@ -21,6 +22,10 @@ function App() {
 
          <Route path="/login">
           <Login></Login>
+         </Route>
+
+         <Route path="/register">
+          <Register></Register>
          </Route>
 
          <Route path="/addStudent">
